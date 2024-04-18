@@ -2,8 +2,19 @@ import sympy
 
 def fatorar_expressao(expressao):
     """Fatora uma expressão algébrica usando o sympy."""
-    x = sympy.Symbol('x')  # Define 'x' como um símbolo para a expressão
-    expressao_simplificada = sympy.simplify(expressao)
+    # Identifica os símbolos (variáveis) na expressão
+    simbolos = sorted(list(set(filter(str.isalpha, expressao))))
+    # Cria os símbolos dinamicamente
+    variaveis = sympy.symbols(simbolos)
+    # Cria um dicionário para mapear string para símbolo
+    variaveis_dict = dict(zip(simbolos, variaveis))
+    
+    # Substitui as variáveis na expressão pelo símbolo correspondente
+    expressao_com_simbolos = expressao
+    for simbolo in simbolos:
+        expressao_com_simbolos = expressao_com_simbolos.replace(simbolo, f"variaveis_dict['{simbolo}']")
+    
+    expressao_simplificada = sympy.simplify(eval(expressao_com_simbolos))
     expressao_fatorada = sympy.factor(expressao_simplificada)
     return expressao_fatorada
 
@@ -16,3 +27,5 @@ try:
     print("Expressão fatorada:", resultado)
 except sympy.SympifyError:
     print("Expressão inválida. Verifique a sintaxe.")
+except Exception as e:
+    print(f"Ocorreu um erro: {e}")
