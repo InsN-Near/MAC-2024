@@ -20,7 +20,6 @@ def simulate_heston(n_samples):
     S[0] = 100  # Inicializando o preço do ativo com um valor arbitrário
     v[0] = v0  # Valor inicial da volatilidade
 
-    # Simulação do modelo de Heston
     for i in range(1, n_samples):
         dW1 = np.random.normal(0, sqrt_dt)
         dW2 = rho * dW1 + np.sqrt(1 - rho**2) * np.random.normal(0, sqrt_dt)
@@ -39,7 +38,7 @@ y = simulate_heston(n_samples).reshape(-1, 1)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Transformando os dados para adicionar características polinomiais
-poly_features = PolynomialFeatures(degree=2, include_bias=False)  
+poly_features = PolynomialFeatures(degree=8, include_bias=False)  
 X_poly_train = poly_features.fit_transform(X_train)
 X_poly_test = poly_features.transform(X_test)
 
@@ -57,14 +56,32 @@ X_range_poly = poly_features.transform(X_range)
 y_pred_range = model.predict(X_range_poly)
 
 # Definindo novos dados de entrada para projeção
-X_new = np.linspace(X.max(), X.max() + 0.2, 20).reshape(-1, 1)  # Ajuste conforme necessário
+X_new = np.linspace(X.max(), X.max() + 0.2, 20).reshape(-1, 1)
 X_new_poly = poly_features.transform(X_new)
 y_new_pred = model.predict(X_new_poly)
 
-# Visualizando os resultados originais e as projeções
-plt.scatter(X_test, y_test, color='black', label='Dados Reais')
-plt.plot(X_range, y_pred_range, color='blue', label='Curva de Regressão Polinomial')
-plt.scatter(X_new, y_new_pred, color='red', label='Projeções')
+# Ordenando os dados de teste
+indices_sorted_test = np.argsort(X_test, axis=0).flatten()
+X_test_sorted = X_test[indices_sorted_test]
+y_test_sorted = y_test[indices_sorted_test]
+
+# Visualizando os resultados originais e as projeções com pontos menores e linhas conectando-os
+plt.scatter(X_test, y_test, color='black', label='Dados Reais', s=1)  # Pontos dos dados reais
+plt.plot(X_range, y_pred_range, color='blue', label='Curva de Regressão Polinomial', linewidth=1)  # Linha do modelo
+plt.scatter(X_new, y_new_pred, color='red', label='Projeções', s=10)  # Pontos das projeções
+
+# Adicionando linhas para conectar os pontos dos dados reais
+plt.plot(X_test_sorted, y_test_sorted, color='black', linewidth=1, linestyle='--')  # Linha pontilhada conectando os pontos dos dados reais
+
+# Adicionando linhas para conectar os pontos de projeção
+indices_sorted = np.argsort(X_new, axis=0).flatten()  # Ordenando os pontos de projeção
+plt.plot(X_new[indices_sorted], y_new_pred[indices_sorted], color='red', linewidth=1, linestyle='--')  # Linha pontilhada para as projeções
+
+# Definindo os limites para os eixos X e Y
+plt.xlim([X.min(), X.max() + 0.2])  # Ajuste conforme necessário
+plt.ylim([y.min(), y.max()])  # Ajuste conforme necessário
+
+
 plt.xlabel('X')
 plt.ylabel('y')
 plt.title('Regressão Polinomial de Grau n Ajustada ao Modelo de Heston com Projeções')
