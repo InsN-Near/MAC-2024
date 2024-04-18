@@ -48,7 +48,7 @@ def gerar_tabela_verdade(n):
             bicondicional(*combinacao)
         ]
         linha = combinacao + tuple(resultados)
-        print(' | '.join(['T' if val else 'F' for val in linha]))
+        print(' | '.join(['V' if val else 'F' for val in linha]))
 
 # Exemplo de uso
-gerar_tabela_verdade(5)  # Altere o número para gerar tabelas para diferentes quantidades de proposições
+gerar_tabela_verdade(2)  # Altere o número para gerar tabelas para diferentes quantidades de proposições
