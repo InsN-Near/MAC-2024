@@ -8,12 +8,12 @@ O repositório está dividido da seguinte forma:
 
 * **1º Ano:**
     * **1º Semestre:**
-        * Fundamentos da Matemática Elementar
-        * Projetos I
-        * Lógica Digital e Robótica
-        * Cálculo I
-        * Geometria Analítica
-        * Algoritmos e Programação de Computadores
+        * [Fundamentos da Matemática Elementar](https://github.com/InsN-Near/MAC-2024/tree/main/1%C2%B0%20Ano/1%C2%B0%20Semestre/Fundamentos%20da%20Matem%C3%A1tica%20Elementar)
+        * [Projetos I](https://github.com/InsN-Near/MAC-2024/tree/main/1%C2%B0%20Ano/1%C2%B0%20Semestre/Projetos%20I)
+        * [Lógica Digital e Robótica](https://github.com/InsN-Near/MAC-2024/tree/main/1%C2%B0%20Ano/1%C2%B0%20Semestre/L%C3%B3gica%20Digital%20e%20Rob%C3%B3tica)
+        * [Cálculo I](https://github.com/InsN-Near/MAC-2024/tree/main/1%C2%B0%20Ano/1%C2%B0%20Semestre/C%C3%A1lculo%20I)
+        * [Geometria Analítica](https://github.com/InsN-Near/MAC-2024/tree/main/1%C2%B0%20Ano/1%C2%B0%20Semestre/Geometria%20Anal%C3%ADtica)
+        * [Algoritmos e Programação de Computadores](https://github.com/InsN-Near/MAC-2024/tree/main/1%C2%B0%20Ano/1%C2%B0%20Semestre/Algoritmos%20e%20Programa%C3%A7%C3%A3o%20de%20Computadores)
     * **2º Semestre:**
         * (Matérias do 2º semestre do 1º ano)
 * **2º Ano:**
